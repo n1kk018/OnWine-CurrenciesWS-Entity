@@ -17,7 +17,6 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@NamedQuery(name = "currency.findAll", query = "SELECT c FROM Currency c")
 public class Currency implements Serializable {
 
     /**
@@ -129,6 +128,20 @@ public class Currency implements Serializable {
      */
     public void setRate(Double paramRate) {
         rate = paramRate;
+    }
+    /**
+     * public accessor for createdAt.
+     * @return Date createdAt
+     */
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    /**
+     * public accessor for updatedAt.
+     * @return Date updatedAt
+     */
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
     @Override
     public String toString() {
