@@ -1,10 +1,16 @@
 package fr.afcepf.atod.ws.currency.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 /**
  * Currency entity.
  * @author nikko
@@ -35,6 +41,18 @@ public class Currency implements Serializable {
      * Exchange rate based on dollar.
      */
     private Double rate;
+    /**
+     * Creation date of the currency.
+     */
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+    /**
+     * Update date of the currency.
+     */
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
     /**
      * Default constructor.
      */
@@ -116,5 +134,21 @@ public class Currency implements Serializable {
     public String toString() {
         return "Currency [id=" + id + ", name=" + name + ", code="
                 + code + ", rate=" + rate + "]";
+    }
+    /**
+     * Tentative de gestion des dates automatiques.
+     */
+    @PrePersist
+    void createdAt() {
+      Date d = new Date();
+      this.createdAt = d;
+      this.updatedAt = d;
+    }
+    /**
+     * Tentative de gestion des dates automatiques.
+     */
+    @PreUpdate
+    void updatedAt() {
+      this.updatedAt = new Date();
     }
 }
