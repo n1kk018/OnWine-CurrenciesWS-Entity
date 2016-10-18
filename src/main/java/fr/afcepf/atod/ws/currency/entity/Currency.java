@@ -44,6 +44,7 @@ public class Currency implements Serializable {
      * Exchange rate based on dollar.
      */
     private Double rate;
+   
     /**
      * Creation date of the currency.
      */
@@ -61,6 +62,9 @@ public class Currency implements Serializable {
      */
     public Currency() {
         super();
+        Date now = new Date();
+        createdAt = now;
+        updatedAt = now;
     }
     /**
      * Constructor with parameters.
@@ -76,6 +80,9 @@ public class Currency implements Serializable {
         name = paramName;
         code = paramCode;
         rate = paramRate;
+        Date now = new Date();
+        createdAt = now;
+        updatedAt = now;
     }
     /**
      * public accessor for id.
@@ -147,25 +154,16 @@ public class Currency implements Serializable {
     public Date getUpdatedAt() {
         return updatedAt;
     }
+    /**
+     * public mutator for updatedAt.
+     * @param paramUpdatedAt last update
+     */
+    public void setUpdatedAt(Date paramUpdatedAt) {
+        updatedAt = paramUpdatedAt;
+    }
     @Override
     public String toString() {
         return "Currency [id=" + id + ", name=" + name + ", code="
                 + code + ", rate=" + rate + "]";
-    }
-    /**
-     * Tentative de gestion des dates automatiques.
-     */
-    @PrePersist
-    void createdAt() {
-      Date d = new Date();
-      this.createdAt = d;
-      this.updatedAt = d;
-    }
-    /**
-     * Tentative de gestion des dates automatiques.
-     */
-    @PreUpdate
-    void updatedAt() {
-      this.updatedAt = new Date();
     }
 }
