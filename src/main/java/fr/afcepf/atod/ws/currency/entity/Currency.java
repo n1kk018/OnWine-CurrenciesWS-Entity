@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -31,6 +33,7 @@ public class Currency implements Serializable {
      * Unique identifier.
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /**
      * Currency name.
@@ -44,7 +47,6 @@ public class Currency implements Serializable {
      * Exchange rate based on dollar.
      */
     private Double rate;
-   
     /**
      * Creation date of the currency.
      */
